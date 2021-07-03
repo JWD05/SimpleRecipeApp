@@ -1,0 +1,62 @@
+* {
+    font-size: 1em;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+h2 {
+    text-align:center
+}
+input {
+    margin-left: 1rem;
+    width: auto;
+}
+output {
+    border: 1px solid blue;
+    margin-left: 1em;    
+}
+textarea {
+    margin-top: 0.5rem;
+}
+label {
+    margin-bottom: 1rem;
+}
+.generalBtn {
+    margin-left: 5%;
+    margin-top: 1rem;
+}
+
+/* Display Recipe Button */
+.recipeList {
+    width: 40%;
+    height: 2.5em;
+    margin-left: 5em;
+    margin-top: 1em;
+}
+.recipeListBtn {
+    width: 8em;
+    height: 2.5em;
+    margin-left: 1em;
+    margin-top: 1em;
+}
+
+/* For the Display and Entry Zone */
+.displayAndEntry {
+    margin-top: 1em;
+    margin-left: 2em;
+    width: 80%;
+    height: auto;
+    border: 1px solid rgb(118, 124, 192);    
+}
+.list {
+    margin-left: 2%;
+    margin-top: 3%;
+}
+
+/* New Recipe Button */
+.newRecipeDiv {
+    width:40%;
+    height: 3rem;
+    margin-left: 35%;
+    margin-top: 0.5em;
+    /* border: 1px solid rgb(118, 124, 192); */
+}

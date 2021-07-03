@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <link href="./css/recipe.css" rel="stylesheet" >
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <header>
+            <h2>Simple Recipe App - your friend in the kitchen</h2>
+        </header>
+        <main>
+            <section>
+                <select class="recipeList" id="recipeListId">
+
+                </select>
+                <button id="recipeListBtn" class="generalBtn">Display Recipe</button>
+            </section>
+            <div class="displayAndEntry">
+                <form id="newRecipeForm">
+                    <div class="list">
+                        <label for='recipeName'>Recipe Name: </label>
+                        <input type="text" id="recipeName" placeholder="Enter the name of recipe">
+                    </div>                    
+                    <div class="list">
+                        <label for='time'>Time to cook:</label>
+                        <input type="text" id="time" placeholder="Enter the time required">
+                    </div>
+                    <div class="list">
+                        <label for='servings'>Servings:</label>
+                        <input type="text" id="servings" placeholder="Enter the number of servings">
+                    </div>
+                    <div class="list">
+                        <label for='ingred'>Ingredients:</label><br>
+                        <textarea id="ingred" row="4" cols="45" placeholder="Enter the Ingredients with their quantities"></textarea>
+                    </div>
+                    <div class="list">
+                        <label for='preparation'>Preparation:</label><br>
+                        <textarea id="prep" placeholder="Enter the preparation steps" row="25" cols="45"></textarea>
+                    </div>
+                    <div>
+                        <button type="reset" style="margin-left:15%; margin-top:5%;" id="newRecipeClearBtn">Clear</button>
+                        <button type="submit" style="margin-left:15%; margin-top:5%;" id="newRecipeSaveBtn">Click to Save</button>
+                    </div>                    
+                </form>
+                <!-- <form id="recipeDisplay">
+                    <div class="list">
+                        <label for='recipeId'>Recipe Id: </label>
+                        <output id="recipeId"></output>
+                    </div>
+                    <div class="list">
+                        <label for='recipeName'>Recipe Name: </label>
+                        <output id="recipeNameOutput"></output>
+                    </div>                    
+                    <div class="list">
+                        <label for='time'>Time to cook:</label>
+                        <output id="time"></output>
+                    </div>
+                    <div class="list">
+                        <label for='servings'>Servings:</label>
+                        <output id="servings"></output>
+                    </div>
+                    <div class="list">
+                        <label for='ingred'>Ingredients:</label>
+                        <output id="ingred"></output>
+                    </div>
+                    <div class="list">
+                        <label for='prep'>Preparation:</label>
+                        <output id="prep"></output>
+                    </div>
+                    <div>
+                        <button type="submit" style="margin-left:20%; margin-top:10%;" id="editBtn">Edit & Save</button>
+                        <button type="submit" style="margin-left:20%; margin-top:5%;" id="deleteBtn">Delete</button>
+                    </div>                                    
+                </form> -->
+            </div>
+            <div class="newRecipeDiv">
+                <button id="newRecipeBtn" class="generalBtn">Enter A New Recipe                
+                </button>
+            </div>
+            
+        </main>
+        <footer>
+
+        </footer>
+        <script src="./js/index.js" ></script>
+        <!-- <script src="./js/recipe.js"></script> -->
+        <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+    crossorigin="anonymous"
+  ></script>
+    </body>
+</html>
