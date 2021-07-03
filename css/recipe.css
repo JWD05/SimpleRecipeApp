@@ -6,19 +6,21 @@
 h2 {
     text-align:center
 }
+img {
+    width: 100%;
+    height: auto;
+    
+}
 input {
-    margin-left: 1rem;
-    width: auto;
+    margin-left: 0.1rem;
+    width: 90%;
 }
 output {
     border: 1px solid blue;
     margin-left: 1em;    
 }
-textarea {
-    margin-top: 0.5rem;
-}
 label {
-    margin-bottom: 1rem;
+    margin-bottom: 0.1rem;
 }
 .generalBtn {
     margin-left: 5%;
@@ -40,16 +42,20 @@ label {
 }
 
 /* For the Display and Entry Zone */
-.displayAndEntry {
+.displayEntry {
     margin-top: 1em;
     margin-left: 2em;
-    width: 80%;
+    width: auto;
     height: auto;
     border: 1px solid rgb(118, 124, 192);    
 }
 .list {
     margin-left: 2%;
-    margin-top: 3%;
+    margin-top: 3%;  
+}
+textarea {
+    width: 100%;
+    margin-top: 0.1rem;
 }
 
 /* New Recipe Button */

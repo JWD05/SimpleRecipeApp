@@ -22,13 +22,14 @@
             <h2>Simple Recipe App - your friend in the kitchen</h2>
         </header>
         <main>
-            <section>
-                <select class="recipeList" id="recipeListId">
+            <form id="recipeListSelect">
+                <select class="recipeList" name="recipeList" id="recipeListId">
 
                 </select>
                 <button id="recipeListBtn" class="generalBtn">Display Recipe</button>
-            </section>
-            <div class="displayAndEntry">
+            </form>
+            <div class="displayEntry" id="displayAndEntry">
+                <img src="./images/indianfood.jpg" />
                 <form id="newRecipeForm">
                     <div class="list">
                         <label for='recipeName'>Recipe Name: </label>
@@ -44,11 +45,11 @@
                     </div>
                     <div class="list">
                         <label for='ingred'>Ingredients:</label><br>
-                        <textarea id="ingred" row="4" cols="45" placeholder="Enter the Ingredients with their quantities"></textarea>
+                        <textarea id="ingred" row="4" placeholder="Enter the Ingredients with their quantities"></textarea>
                     </div>
                     <div class="list">
                         <label for='preparation'>Preparation:</label><br>
-                        <textarea id="prep" placeholder="Enter the preparation steps" row="25" cols="45"></textarea>
+                        <textarea id="prep" placeholder="Enter the preparation steps" row="25"></textarea>
                     </div>
                     <div>
                         <button type="reset" style="margin-left:15%; margin-top:5%;" id="newRecipeClearBtn">Clear</button>
@@ -61,28 +62,28 @@
                         <output id="recipeId"></output>
                     </div>
                     <div class="list">
-                        <label for='recipeName'>Recipe Name: </label>
-                        <output id="recipeNameOutput"></output>
+                        <label for='reciNameOutput'>Recipe Name: </label>
+                        <output id="reciNameOutput"></output>
                     </div>                    
                     <div class="list">
-                        <label for='time'>Time to cook:</label>
-                        <output id="time"></output>
+                        <label for='reciOutTime'>Time to cook:</label>
+                        <output id="reciOutTime"></output>
                     </div>
                     <div class="list">
-                        <label for='servings'>Servings:</label>
-                        <output id="servings"></output>
+                        <label for='reciOutServings'>Servings:</label>
+                        <output id="reciOutServings"></output>
                     </div>
                     <div class="list">
-                        <label for='ingred'>Ingredients:</label>
-                        <output id="ingred"></output>
+                        <label for='reciOutIngred'>Ingredients:</label>
+                        <output id="reciOutIngred"></output>
                     </div>
                     <div class="list">
-                        <label for='prep'>Preparation:</label>
-                        <output id="prep"></output>
+                        <label for='reciOutPrep'>Preparation:</label>
+                        <output id="reciOutPrep"></output>
                     </div>
                     <div>
                         <button type="submit" style="margin-left:20%; margin-top:10%;" id="editBtn">Edit & Save</button>
-                        <button type="submit" style="margin-left:20%; margin-top:5%;" id="deleteBtn">Delete</button>
+                        <button type="submit" style="margin-left:45%; margin-top:5%;" id="deleteBtn">Delete</button>
                     </div>                                    
                 </form> -->
             </div>
