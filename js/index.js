@@ -44,8 +44,8 @@ function createDispReciHtml(id, name, time, serving, ingred, prep){
         <output id="prep">"${prep}"</output>
     </div>
     <div>
-        <!--<button type="submit" style="margin-left:20%; margin-top:10%;" class="editBtn" id="editBtn" style="display:none">Edit & Save</button>-->
-        <button type="submit" style="margin-left:40%; margin-top:5%;" class="deleteBtn" id="deleteBtn">Delete</button>
+        <button type="submit" style="margin-left:25%; margin-top:10%;" class="closeBtn" style="display:none">Close</button>
+        <button type="submit" style="margin-left:20%; margin-top:5%;" class="deleteBtn">Delete</button>
     </div>                                    
 </section>`;
 return html1;
@@ -101,6 +101,7 @@ class RecipeClass{
         this._recipeId += 1;
         return this._recipeId;
     }
+
     //function for adding recipe to the recipes array
     addRecipe(recname, rectime, recservings, recingredients, recpreparation){
         const recipe={};
@@ -112,7 +113,8 @@ class RecipeClass{
         recipe.Ingredients = recingredients;
         recipe.Preparation = recpreparation;
         this._recipes.push(recipe);
-    }  
+    }
+
     //function for storing the recipe in the Local storage
     saveJSON(){
         let recipeJson = JSON.stringify(this._recipes);
@@ -122,6 +124,7 @@ class RecipeClass{
         console.log(currReciId);
         localStorage.setItem("recipeId", currReciId);
     }
+
     //function for retrieving the the recipe from the Local storage
     loadJSON(){
         const recipeJson = localStorage.getItem('recipes');
@@ -133,6 +136,7 @@ class RecipeClass{
             console.log(this._recipes);
         }
     }
+
     // function for populating the drop down list and rendering it
     renderSelectList(){
         const recipeNameArray = [];
@@ -158,15 +162,19 @@ class RecipeClass{
         targetHtmlArea.innerHTML = tempString;
     }
 
+    //function for rendering the selected recipe from the drop list
     renderRecipe(){
-        let selectRec = parseInt(document.getElementById("recipeListId").value);//value from the select-option element
+        // let displayreci = document.getElementById('displayAndEntry');
+        // displayreci.innerHTML = "";//clearing any old displayed recipe
+        //
+        let selectRec = parseInt(document.getElementById("recipeListId").value);//value from the Select element -selected option
         console.log(selectRec);
         console.log(typeof selectRec);
         const recipeJson = localStorage.getItem('recipes');
         this._recipes = JSON.parse(recipeJson);
         let temphtml="";
         console.log(this._recipes);
-        // if (selectRec != "" && selectRec !== 0){            
+        if (selectRec != "" && selectRec !== 0){            
             for(const recp of this._recipes){
                 
                 if(recp.Id === selectRec){
@@ -174,15 +182,34 @@ class RecipeClass{
                     console.log(recp);
                 }
             }
-            let displayreci = document.getElementById('displayAndEntry');
-            displayreci.innerHTML = temphtml;
-        // }        
-              
+            let displayrec = document.getElementById('newRecipeForm');
+            displayrec.style.display = "none";
+            let displayrec3 = document.getElementById('recipeListBtn');
+            displayrec3.disabled = true;
+            let displayreci2 = document.getElementById('displayAndEntry');
+            displayreci2.innerHTML = temphtml;
+        }              
     }
+
+    //function for rendering new form for a new recipe
     renderNewRecipe(){
-        let tempNewHtml = createEntNewReciHtml();
-        let displayrec = document.getElementById('displayAndEntry');
-        displayrec.innerHTML = tempNewHtml;
+        // let tempNewHtml = createEntNewReciHtml();
+        // let displayrec = document.getElementById('displayAndEntry');
+        // displayrec.innerHTML = tempNewHtml;
+        let displayrec = document.getElementById('newRecipeForm');
+        displayrec.style.display = "block";
+    }
+
+    deleteRecipe(parenId){
+        let tempId = Number(parenId);
+        for(let i=0; i< this._recipes.length; i++){
+            if(this._recipes[i].Id === tempId){
+                this._recipes.splice(i, 1);                
+            }
+        }
+        this.saveJSON();
+        this.renderSelectList();
+        resetWebPage();        
     }
     
 }
@@ -192,7 +219,11 @@ const recipeClass = new RecipeClass(0);
 console.log(recipeClass.recipes);
 recipeClass.loadJSON();
 recipeClass.renderSelectList();
-//recipeClass.
+
+//function to reset the web page.
+function resetWebPage(){    
+    location.reload();
+}
 
 
 //-------Grabbing or linking to the elements on the Web page-----
@@ -214,7 +245,7 @@ let listRecipeTime = document.getElementById('reciOutTime');
 let listRecipeServings = document.getElementById('reciOutServings');
 let listRecipeIngred = document.getElementById('reciOutIngred');
 let listRecipePrep = document.getElementById('reciOutPrep');
-let listRecipeDelBtn = document.getElementById('deleteBtn');
+let SpecialBtn = document.getElementById('displayAndEntry');
 
 //Validation and Saving of new Recipe
 let validRecipe = false;
@@ -290,18 +321,24 @@ newRecipeClearBtn.addEventListener('click', newRecipeClear);
 newRecipeClearBtn.addEventListener('click', (event)=>{
     event.preventDefault();
 });
-//Event Listener for <div id="displayAndEntry">
-// let reciDisplayEntry = document.getElementById('displayAndEntry');
-// reciDisplayEntry.addEventListener('click',(event)=>{
-//     console.log(event.target.classList);
-//     if(event.target.classList.contains('newRecipeSaveBtn'))
-//     {   
-//         newRecipeSave();
-//     }
-//     else if(event.target.classList.contains('newRecipeClearBtn'))
-//     {
-//         newRecipeClear();
-//     }
-// });
+SpecialBtn.addEventListener('click', (event) =>{
+    console.log(event.target.classList);
+    //Delete button on the recipe display output
+    if(event.target.classList.contains('deleteBtn')){
+        const parentElem = event.target.parentElement.parentElement; // Accessing the grandparent of the event.target element
+        console.log(parentElem);
+        const parentId = (parentElem.dataset.id);
+        console.log(parentId);
+        recipeClass.deleteRecipe(parentId);
+    }
+    if(event.target.classList.contains('closeBtn')){
+        const parentElem = event.target.parentElement.parentElement; // Accessing the grandparent of the event.target element
+        console.log(parentElem);
+        const parentId = (parentElem.dataset.id);
+        console.log(parentId);
+        //recipeClass.deleteRecipe(parentId);
+        resetWebPage();
+    }    
+});
 
 
