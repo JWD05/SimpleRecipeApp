@@ -9,7 +9,7 @@ h2 {
 img {
     width: 100%;
     height: auto;
-    
+    padding:0.2em;
 }
 input {
     margin-left: 0.1rem;
@@ -17,10 +17,12 @@ input {
 }
 output {
     border: 1px solid blue;
-    margin-left: 1em;    
+    margin-left: 1em; 
+    width: 90%;   
 }
 label {
     margin-bottom: 0.1rem;
+    font-weight: bold;
 }
 .generalBtn {
     margin-left: 5%;

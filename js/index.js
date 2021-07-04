@@ -1,4 +1,4 @@
-// Creation of selectHtml
+// Creation of selectHtml - Populating the drop down list
 function createSelectHtml(arrayRec){
     let html = `<option value="0">Select a recipe</option>`;
     let htmlArray = [];
@@ -16,36 +16,36 @@ function createSelectHtml(arrayRec){
       return htmlArray;  
 }
 
-//Creation of displayRecipeHtml
+//Creation of displayRecipeHtml - supplying the template literal for rendering the recipes
 function createDispReciHtml(id, name, time, serving, ingred, prep){
     let html1 = `<section id="recipeDisplay" data-id="${id}">
     <div class="list">
-        <label for='recipeId'>Recipe Id: "${id}"</label>
-        <output id="recipeId"></output>
+        <label for='recipeId'>Recipe Id: </label>
+        <output id="recipeId">"${id}"</output>
     </div>
     <div class="list">
-        <label for='recipeName'>Recipe Name: "${name}" </label>
-        <output id="recipeNameOutput"></output>
+        <label for='recipeName'>Recipe Name:  </label>
+        <output id="recipeNameOutput">"${name}"</output>
     </div>                    
     <div class="list">
-        <label for='time'>Time to cook: "${time}"</label>
-        <output id="time"></output>
+        <label for='time'>Time to cook: </label>
+        <output id="time">"${time}"</output>
     </div>
     <div class="list">
-        <label for='servings'>Servings: "${serving}"</label>
-        <output id="servings"></output>
+        <label for='servings'>Servings: </label>
+        <output id="servings">"${serving}"</output>
     </div>
     <div class="list">
-        <label for='ingred'>Ingredients: "${ingred}"</label>
-        <output id="ingred"></output>
+        <label for='ingred'>Ingredients: </label>
+        <output id="ingred">"${ingred}"</output>
     </div>
     <div class="list">
-        <label for='prep'>Preparation: "${prep}"</label>
-        <output id="prep"></output>
+        <label for='prep'>Preparation: </label>
+        <output id="prep">"${prep}"</output>
     </div>
     <div>
-        // <button type="submit" style="margin-left:20%; margin-top:10%;" class="editBtn" id="editBtn">Edit & Save</button>
-        <button type="submit" style="margin-left:20%; margin-top:5%;" class="deleteBtn" id="deleteBtn">Delete</button>
+        <!--<button type="submit" style="margin-left:20%; margin-top:10%;" class="editBtn" id="editBtn" style="display:none">Edit & Save</button>-->
+        <button type="submit" style="margin-left:40%; margin-top:5%;" class="deleteBtn" id="deleteBtn">Delete</button>
     </div>                                    
 </section>`;
 return html1;
@@ -101,7 +101,7 @@ class RecipeClass{
         this._recipeId += 1;
         return this._recipeId;
     }
-
+    //function for adding recipe to the recipes array
     addRecipe(recname, rectime, recservings, recingredients, recpreparation){
         const recipe={};
         let id = this.incrementRecipeId();        
@@ -112,8 +112,28 @@ class RecipeClass{
         recipe.Ingredients = recingredients;
         recipe.Preparation = recpreparation;
         this._recipes.push(recipe);
+    }  
+    //function for storing the recipe in the Local storage
+    saveJSON(){
+        let recipeJson = JSON.stringify(this._recipes);
+        localStorage.setItem("recipes", recipeJson);
+        console.log(recipeJson);
+        let currReciId = JSON.stringify(this._recipeId);
+        console.log(currReciId);
+        localStorage.setItem("recipeId", currReciId);
     }
-
+    //function for retrieving the the recipe from the Local storage
+    loadJSON(){
+        const recipeJson = localStorage.getItem('recipes');
+        if(recipeJson != null){
+            this._recipes = JSON.parse(recipeJson);
+            console.log(this._recipes); //loaded data into this._recipes from LocaleStorage
+            const stringRecipeId = localStorage.getItem("recipeId");
+            this._recipeId = parseInt(stringRecipeId);
+            console.log(this._recipes);
+        }
+    }
+    // function for populating the drop down list and rendering it
     renderSelectList(){
         const recipeNameArray = [];
         let selectHtml = "";
@@ -129,27 +149,34 @@ class RecipeClass{
         }
         selectHtml = createSelectHtml(recipeNameArray);
         console.log(selectHtml);
-        recipeNameArray.push(selectHtml);
-        let tempString = recipeNameArray.join('\n');
+        const reciArray = [];
+        reciArray.push(selectHtml);
+        let tempString = reciArray.join('\n');
         let targetHtmlArea = document.getElementById('recipeListId');
-        console.log(tempString);        
+        console.log(tempString);
+        console.log(this._recipes);
         targetHtmlArea.innerHTML = tempString;
     }
+
     renderRecipe(){
-        let selectRec = parseInt(document.getElementById("recipeListId").value);
+        let selectRec = parseInt(document.getElementById("recipeListId").value);//value from the select-option element
+        console.log(selectRec);
         console.log(typeof selectRec);
+        const recipeJson = localStorage.getItem('recipes');
+        this._recipes = JSON.parse(recipeJson);
         let temphtml="";
-        if (selectRec != "" && selectRec !== 0){            
-            for(const recip of this._recipes){
-                //console.log(`Hi I am here`);
-                if(recip.Id === selectRec){
-                    temphtml = createDispReciHtml(recip.Id, recip.Name, recip.Time, recip.Servings, recip.Ingredients, recip.Preparation);
-                    console.log(recip);
+        console.log(this._recipes);
+        // if (selectRec != "" && selectRec !== 0){            
+            for(const recp of this._recipes){
+                
+                if(recp.Id === selectRec){
+                    temphtml = createDispReciHtml(recp.Id, recp.Name, recp.Time, recp.Servings, recp.Ingredients, recp.Preparation);
+                    console.log(recp);
                 }
             }
             let displayreci = document.getElementById('displayAndEntry');
             displayreci.innerHTML = temphtml;
-        }        
+        // }        
               
     }
     renderNewRecipe(){
@@ -157,30 +184,7 @@ class RecipeClass{
         let displayrec = document.getElementById('displayAndEntry');
         displayrec.innerHTML = tempNewHtml;
     }
-    // renderPicture(){
-    //     let tempPhoto = `<img src="./images/indianfood.jpg" />`;
-    //     let displayphoto = document.getElementById('displayAndEntry');
-    //     console.log(tempPhoto);
-    //     displayphoto.innerHTML = tempPhoto;
-    // }
-    saveJSON(){
-        let recipeJson = JSON.stringify(this._recipes);
-        localStorage.setItem("recipes", recipeJson);
-        let currReciId = JSON.stringify(this._recipeId);
-        localStorage.setItem("recipeId", currReciId);
-    }
-    loadJSON(){
-        const recipeJson = localStorage.getItem('recipes');
-        if(recipeJson != null){
-            this._recipes = JSON.parse(recipeJson);
-            console.log(this._recipes); //loaded data into this._recipes from LocaleStorage
-            const stringRecipeId = localStorage.getItem("recipeId");
-            this._recipeId = parseInt(stringRecipeId);
-        }
-    }
-    // deleteRecipe(recipeId){
-        
-    // }
+    
 }
 
 //Initiation of the class object and the loading of the available data
@@ -215,6 +219,7 @@ let listRecipeDelBtn = document.getElementById('deleteBtn');
 //Validation and Saving of new Recipe
 let validRecipe = false;
 const newRecipeSave =()=>{
+    
     //Validation 
     if(newRecipeName.value !== ""){validRecipe = true;}
     else{validRecipe = false;
@@ -235,13 +240,13 @@ const newRecipeSave =()=>{
     if(newRecipePreparation.value !== ""){validRecipe = true;}
     else{validRecipe = false;
     newRecipePreparation.border = "1px solid red";}
-
+    // let validRecipe = true;
     //Saving of the Recipe details
     if(validRecipe === true){
-        recipeClass.addRecipe(newRecipeName.value, newRecipeTime.value, newRecipeServings.value, newRecipeIngredients.value, newRecipePreparation.value);
-        newRecipeClear();
+        recipeClass.addRecipe(newRecipeName.value, newRecipeTime.value, newRecipeServings.value, newRecipeIngredients.value, newRecipePreparation.value);        
         recipeClass.renderSelectList();
         recipeClass.saveJSON();
+        newRecipeClear();
         //console.log(recipeClass.recipes);
         //console.log(recipeClass.recipeId);
         //console.log(recipeClass.renderSelectList());
