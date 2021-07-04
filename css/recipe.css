@@ -6,9 +6,13 @@
 h2 {
     text-align:center
 }
+body{
+    padding: 10%;
+}
 img {
-    width: 100%;
+    width: 90%;
     height: auto;
+    margin: 5%;
     padding:0.2em;
 }
 input {
@@ -24,23 +28,27 @@ label {
     margin-bottom: 0.1rem;
     font-weight: bold;
 }
-.generalBtn {
+/* .generalBtn {
     margin-left: 5%;
     margin-top: 1rem;
-}
+    width: 15rem; 
+}*/
 
 /* Display Recipe Button */
-.recipeList {
-    width: 40%;
-    height: 2.5em;
-    margin-left: 5em;
-    margin-top: 1em;
+#recipeListSelect{   
+    margin-left: 20%;
 }
-.recipeListBtn {
-    width: 8em;
-    height: 2.5em;
-    margin-left: 1em;
-    margin-top: 1em;
+.recipeList {
+    width: 12em;
+    height: 2em;
+    margin-left: 6%;
+    margin-top: 1rem;
+}
+.generalBtn {
+    width: 12em;
+    height: 2em;
+    margin-left: 6%;
+    margin-top: 0.5rem;
 }
 
 /* For the Display and Entry Zone */
@@ -62,9 +70,11 @@ textarea {
 
 /* New Recipe Button */
 .newRecipeDiv {
-    width:40%;
+   
     height: 3rem;
-    margin-left: 35%;
-    margin-top: 0.5em;
-    /* border: 1px solid rgb(118, 124, 192); */
+    display:flex;
+    /* flex-direction: row;
+    align-content: center; */
+    margin-left: 30%;
+    margin-top: 0.5em;      
 }
