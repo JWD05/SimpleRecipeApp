@@ -130,10 +130,10 @@ class RecipeClass{
         const recipeJson = localStorage.getItem('recipes');
         if(recipeJson != null){
             this._recipes = JSON.parse(recipeJson);
-            console.log(this._recipes); //loaded data into this._recipes from LocaleStorage
+            //console.log(this._recipes); //loaded data into this._recipes from LocaleStorage
             const stringRecipeId = localStorage.getItem("recipeId");
             this._recipeId = parseInt(stringRecipeId);
-            console.log(this._recipes);
+            //console.log(this._recipes);
         }
     }
 
@@ -165,12 +165,12 @@ class RecipeClass{
     //function for rendering the selected recipe from the drop list
     renderRecipe(){        
         let selectRec = parseInt(document.getElementById("recipeListId").value);//value from the Select element -selected option
-        console.log(selectRec);
-        console.log(typeof selectRec);
-        const recipeJson = localStorage.getItem('recipes');
+        //console.log(selectRec);
+        //console.log(typeof selectRec);
+        const recipeJson = localStorage.getItem('recipes'); // Get the stored Recipes object array from local storage
         this._recipes = JSON.parse(recipeJson);
         let temphtml="";
-        console.log(this._recipes);
+        //console.log(this._recipes);
         if (selectRec != "" && selectRec !== 0){            
             for(const recp of this._recipes){
                 
@@ -180,11 +180,12 @@ class RecipeClass{
                 }
             }
             let displayrec = document.getElementById('newRecipeForm');
-            displayrec.style.display = "none";
+            displayrec.style.display = "none";// Disabling of the 'New Recipe Form' if being displayed
             let displayrec3 = document.getElementById('recipeListBtn');
-            displayrec3.disabled = true;
+            displayrec3.disabled = true;// Disabling of the 'Display Recipe' button
+
             let displayreci2 = document.getElementById('displayAndEntry');
-            displayreci2.innerHTML = temphtml;
+            displayreci2.innerHTML = temphtml; //Displaying the template literal in the parent element
         }              
     }
 
@@ -257,7 +258,7 @@ const newRecipeSave =()=>{
     else{validRecipe += 1;
         //newRecipeTime.style.border = "1px solid black";
     }
-    
+
     if(newRecipeServings.value.length < 1){
         //newRecipeServings.style.border = "1px solid red";
     }
