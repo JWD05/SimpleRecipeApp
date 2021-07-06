@@ -347,11 +347,16 @@ SpecialBtn.addEventListener('click', (event) =>{
     console.log(event.target.classList);
     //Delete button on the recipe display output
     if(event.target.classList.contains('deleteBtn')){
+        let delPrompt = prompt("Are you sure?");
+        if(delPrompt == null || delPrompt == ""){
+
+        }
+        else{
         const parentElem = event.target.parentElement.parentElement; // Accessing the grandparent of the event.target element
         console.log(parentElem);
         const parentId = (parentElem.dataset.id);
         console.log(parentId);
-        recipeClass.deleteRecipe(parentId);
+        recipeClass.deleteRecipe(parentId);}
     }
     if(event.target.classList.contains('closeBtn')){
         const parentElem = event.target.parentElement.parentElement; // Accessing the grandparent of the event.target element
