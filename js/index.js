@@ -163,8 +163,7 @@ class RecipeClass{
     }
 
     //function for rendering the selected recipe from the drop list
-    renderRecipe(){
-        
+    renderRecipe(){        
         let selectRec = parseInt(document.getElementById("recipeListId").value);//value from the Select element -selected option
         console.log(selectRec);
         console.log(typeof selectRec);
@@ -190,8 +189,7 @@ class RecipeClass{
     }
 
     //function for rendering new form for a new recipe
-    renderNewRecipe(){
-       
+    renderNewRecipe(){       
         let displayrec = document.getElementById('newRecipeForm');
         displayrec.style.display = "block";
     }
@@ -206,8 +204,7 @@ class RecipeClass{
         this.saveJSON();
         this.renderSelectList();
         resetWebPage();        
-    }
-    
+    }    
 }
 
 //Initiation of the class object and the loading of the available data
@@ -220,7 +217,6 @@ recipeClass.renderSelectList();
 function resetWebPage(){    
     location.reload();
 }
-
 
 //-------Grabbing or linking to the elements on the Web page-----
 //---New Recipe Form Elements
@@ -261,6 +257,7 @@ const newRecipeSave =()=>{
     else{validRecipe += 1;
         //newRecipeTime.style.border = "1px solid black";
     }
+    
     if(newRecipeServings.value.length < 1){
         //newRecipeServings.style.border = "1px solid red";
     }
