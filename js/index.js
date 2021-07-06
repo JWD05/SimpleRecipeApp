@@ -21,27 +21,27 @@ function createDispReciHtml(id, name, time, serving, ingred, prep){
     let html1 = `<section id="recipeDisplay" data-id="${id}">
     <div class="list">
         <label for='recipeId'>Recipe Id: </label>
-        <output id="recipeId">"${id}"</output>
+        <output id="recipeId">${id}</output>
     </div>
     <div class="list">
         <label for='recipeName'>Recipe Name:  </label>
-        <output id="recipeNameOutput">"${name}"</output>
+        <output id="recipeNameOutput">${name}</output>
     </div>                    
     <div class="list">
         <label for='time'>Time to cook: </label>
-        <output id="time">"${time}"</output>
+        <output id="time">${time}</output>
     </div>
     <div class="list">
         <label for='servings'>Servings: </label>
-        <output id="servings">"${serving}"</output>
+        <output id="servings">${serving}</output>
     </div>
     <div class="list">
         <label for='ingred'>Ingredients: </label>
-        <output id="ingred">"${ingred}"</output>
+        <output id="ingred">${ingred}</output>
     </div>
     <div class="list">
         <label for='prep'>Preparation: </label>
-        <output id="prep">"${prep}"</output>
+        <output id="prep">${prep}</output>
     </div>
     <div>
         <button type="submit" style="margin-left:25%; margin-top:10%;" class="closeBtn" style="display:none">Close</button>
@@ -164,9 +164,7 @@ class RecipeClass{
 
     //function for rendering the selected recipe from the drop list
     renderRecipe(){
-        // let displayreci = document.getElementById('displayAndEntry');
-        // displayreci.innerHTML = "";//clearing any old displayed recipe
-        //
+        
         let selectRec = parseInt(document.getElementById("recipeListId").value);//value from the Select element -selected option
         console.log(selectRec);
         console.log(typeof selectRec);
@@ -193,9 +191,7 @@ class RecipeClass{
 
     //function for rendering new form for a new recipe
     renderNewRecipe(){
-        // let tempNewHtml = createEntNewReciHtml();
-        // let displayrec = document.getElementById('displayAndEntry');
-        // displayrec.innerHTML = tempNewHtml;
+       
         let displayrec = document.getElementById('newRecipeForm');
         displayrec.style.display = "block";
     }
@@ -248,32 +244,37 @@ let listRecipePrep = document.getElementById('reciOutPrep');
 let SpecialBtn = document.getElementById('displayAndEntry');
 
 //Validation and Saving of new Recipe
-let validRecipe = false;
+let validRecipe = 0;
 const newRecipeSave =()=>{
     
     //Validation 
-    if(newRecipeName.value !== ""){validRecipe = true;}
-    else{validRecipe = false;
-        newRecipeName.style.border = "1px solid red";}
+    if(newRecipeName.value.length < 1){
+        newRecipeName.style.border = "1px solid red";
+    }
+    else{validRecipe += 1;
+        newRecipeName.style.border = "1px solid black";}
 
-    if(newRecipeTime.value !== ""){validRecipe = true;}
-    else{validRecipe = false;
-    newRecipeName.style.border = "1px solid red";}
+    if(newRecipeTime.value.length < 1){
+        newRecipeTime.style.border = "1px solid red";}
+    else{validRecipe += 1;
+        newRecipeTime.style.border = "1px solid black";}
 
-    if(newRecipeServings.value !== ""){validRecipe = true;}
-    else{validRecipe = false;
-    newRecipeServings.border = "1px solid red";}
+    if(newRecipeServings.value.length < 1){newRecipeServings.style.border = "1px solid red"}
+    else{validRecipe += 1;
+    newRecipeServings.style.border = "1px solid black";}
 
-    if(newRecipeIngredients.value !== ""){validRecipe = true;}
-    else{validRecipe = false;
-    newRecipeIngredients.border = "1px solid red";}
+    if(newRecipeIngredients.value < 1)
+    {newRecipeIngredients.style.border = "1px solid red";}
+    else{validRecipe += 1;
+    newRecipeIngredients.style.border = "1px solid black";}
 
-    if(newRecipePreparation.value !== ""){validRecipe = true;}
-    else{validRecipe = false;
-    newRecipePreparation.border = "1px solid red";}
+    if(newRecipePreparation.value < 1)
+    {newRecipePreparation.style.border = "1px solid red";}
+    else{validRecipe += 1;
+    newRecipePreparation.style.border = "1px solid black";}
     // let validRecipe = true;
     //Saving of the Recipe details
-    if(validRecipe === true){
+    if(validRecipe === 5){
         recipeClass.addRecipe(newRecipeName.value, newRecipeTime.value, newRecipeServings.value, newRecipeIngredients.value, newRecipePreparation.value);        
         recipeClass.renderSelectList();
         recipeClass.saveJSON();
@@ -281,8 +282,25 @@ const newRecipeSave =()=>{
         //console.log(recipeClass.recipes);
         //console.log(recipeClass.recipeId);
         //console.log(recipeClass.renderSelectList());
-    }
-    else{}
+    } 
+    else{validRecipe = 0;}   
+}
+
+function secondValid(){
+    if(newRecipeName.value.length < 1){newRecipeName.style.border = '1px solid red';}
+    else{newRecipeName.style.border = '1px solid black';}
+
+    if(newRecipeTime.value.length < 1){newRecipeTime.style.border = '1px solid red';}
+    else{newRecipeTime.style.border = '1px solid black';}
+
+    if(newRecipeServings.value.length < 1){newRecipeServings.style.border = '1px solid red';}
+    else{newRecipeServings.style.border = '1px solid black';}
+
+    if(newRecipeIngredients.value.length < 1){newRecipeIngredients.style.border = '1px solid red';}
+    else{newRecipeIngredients.style.border = '1px solid black';}
+
+    if(newRecipePreparation.value.length < 1){newRecipePreparation.style.border = '1px solid red';}
+    else{newRecipePreparation.style.border = '1px solid black';}
 }
 
 //Clearing the new Recipe Form fields
@@ -305,22 +323,26 @@ const newRecipeClear = ()=>{
 
 //----Click Event Listeners ----
 
-listRecipeListBtn.addEventListener('click', recipeClass.renderRecipe);
+listRecipeListBtn.addEventListener('click', recipeClass.renderRecipe);//'Display Recipe' button related
 listRecipeListBtn.addEventListener('click', (event)=>{
     event.preventDefault();
-});
-newRecipBtn.addEventListener('click', recipeClass.renderNewRecipe );
+});//'Display Recipe' button related
+
+newRecipBtn.addEventListener('click', recipeClass.renderNewRecipe );//'Enter A New Recipe' button related
 newRecipBtn.addEventListener('click', (event)=>{
     event.preventDefault();
-});
-newRecipeSaveBtn.addEventListener('click', newRecipeSave);
+});//'Enter A New Recipe' button related
+
+newRecipeSaveBtn.addEventListener('click', newRecipeSave);//Related to the 'Save Recipe' button on the new recipe form
 newRecipeSaveBtn.addEventListener('click', (event)=>{
     event.preventDefault();
-});
-newRecipeClearBtn.addEventListener('click', newRecipeClear);
+});//Related to the 'Save Recipe' button on the new recipe form
+
+newRecipeClearBtn.addEventListener('click', newRecipeClear);//Related to the 'Clear' button on the new recipe form
 newRecipeClearBtn.addEventListener('click', (event)=>{
     event.preventDefault();
-});
+});//Related to the 'Clear' button on the new recipe form
+
 SpecialBtn.addEventListener('click', (event) =>{
     console.log(event.target.classList);
     //Delete button on the recipe display output
@@ -340,5 +362,14 @@ SpecialBtn.addEventListener('click', (event) =>{
         resetWebPage();
     }    
 });
+
+//Event Listener for the form fields in the new recipe form
+newRecipeName.addEventListener('input', secondValid);
+newRecipeTime.addEventListener('input', secondValid);
+newRecipeServings.addEventListener('input', secondValid);
+newRecipeIngredients.addEventListener('input', secondValid);
+newRecipePreparation.addEventListener('input', secondValid);
+
+
 
 
