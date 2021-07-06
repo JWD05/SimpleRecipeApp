@@ -85,8 +85,8 @@ return html2;
 // Class 
 class RecipeClass{
     constructor(recipeId = 0){
-        this._recipes = [];
-        this._recipeId = recipeId;
+        this._recipes = []; //recipe object array
+        this._recipeId = recipeId; //recipe id
     }
 
     get recipeId(){
@@ -249,30 +249,39 @@ const newRecipeSave =()=>{
     
     //Validation 
     if(newRecipeName.value.length < 1){
-        newRecipeName.style.border = "1px solid red";
+        //newRecipeName.style.border = "1px solid red";
     }
     else{validRecipe += 1;
-        newRecipeName.style.border = "1px solid black";}
+        //newRecipeName.style.border = "1px solid black";
+    }
 
     if(newRecipeTime.value.length < 1){
-        newRecipeTime.style.border = "1px solid red";}
+        //newRecipeTime.style.border = "1px solid red";
+    }
     else{validRecipe += 1;
-        newRecipeTime.style.border = "1px solid black";}
+        //newRecipeTime.style.border = "1px solid black";
+    }
+    if(newRecipeServings.value.length < 1){
+        //newRecipeServings.style.border = "1px solid red";
+    }
+    else{validRecipe += 1;
+        //newRecipeServings.style.border = "1px solid black";
+    }
 
-    if(newRecipeServings.value.length < 1){newRecipeServings.style.border = "1px solid red"}
+    if(newRecipeIngredients.value < 1){
+        //newRecipeIngredients.style.border = "1px solid red";
+    }
     else{validRecipe += 1;
-    newRecipeServings.style.border = "1px solid black";}
+        //newRecipeIngredients.style.border = "1px solid black";
+    }
 
-    if(newRecipeIngredients.value < 1)
-    {newRecipeIngredients.style.border = "1px solid red";}
+    if(newRecipePreparation.value < 1){
+        //newRecipePreparation.style.border = "1px solid red";
+    }
     else{validRecipe += 1;
-    newRecipeIngredients.style.border = "1px solid black";}
-
-    if(newRecipePreparation.value < 1)
-    {newRecipePreparation.style.border = "1px solid red";}
-    else{validRecipe += 1;
-    newRecipePreparation.style.border = "1px solid black";}
-    // let validRecipe = true;
+        //newRecipePreparation.style.border = "1px solid black";
+    }
+    
     //Saving of the Recipe details
     if(validRecipe === 5){
         recipeClass.addRecipe(newRecipeName.value, newRecipeTime.value, newRecipeServings.value, newRecipeIngredients.value, newRecipePreparation.value);        
@@ -312,13 +321,13 @@ const newRecipeClear = ()=>{
     newRecipeTime.style.border = "1px solid black";
 
     newRecipeServings.value = "";
-    newRecipeServings.border = "1px solid black";
+    newRecipeServings.style.border = "1px solid black";
 
     newRecipeIngredients.value = "";
-    newRecipeIngredients.border = "1px solid black";
+    newRecipeIngredients.style.border = "1px solid black";
 
     newRecipePreparation.value = "";
-    newRecipePreparation.border = "1px solid black";
+    newRecipePreparation.style.border = "1px solid black";
 }
 
 //----Click Event Listeners ----
