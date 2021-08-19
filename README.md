@@ -1,4 +1,6 @@
 # SimpleRecipeApp
+App created for a surprise challenge at the Generation Australia Boot Camp for Junior Web Developers.
+
 This App was created for a surprise coding challenge I got after we had finished our main project at the Generation Australia Bootcamp - JWD Cohort - 5.
 The technologies used here were HTML, CSS and JavaScript(Vanilla). The editor used was VScode. 
 The wireframe was created on draw.io.
